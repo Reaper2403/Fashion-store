@@ -97,53 +97,61 @@ def on_leave4(e):
     if name == '':
         date_of_birth.insert(0, 'Date of Birth')
 
-frame = Frame(root, width=350, height=350, bg='white')
-frame.place(x=25, y=25)
+Registration_frame = Frame(root, width=350, height=350, bg='white')
+Registration_frame.pack()
+# Registration_frame.place(x=25, y=25)
 
-heading = Label(frame, text='Registration Form', fg='#0047ab', bg='white', font='Arimo,15,bold')
-heading.place(x=80, y=5)
+heading = Label(Registration_frame, text='Registration Form'.upper(), fg='blue', bg='white', font='Arimo,60,bold')
+heading.pack(side=TOP, fill=X, padx=15, pady=15, ipadx=25, ipady=10)
+# heading.place(x=80, y=5)
 
-user = Entry(frame, width=25, fg='black', borderwidth=0, bg='white', font='Arimo,11')
-user.place(x=50, y=50)
+user = Entry(Registration_frame, width=25, fg='indigo', borderwidth=0.5, bg='white', font='Arimo,20')
+user.pack(fill=X, padx=15, pady=5, ipadx=5, ipady=5)
+# user.place(x=50, y=50)
 user.insert(0, 'Username')
 user.bind('<FocusIn>', on_enter)
 user.bind('<FocusOut>', on_leave)
 
-Frame(frame, width=295, height=2, bg='black').place(x=25, y=77)
+# Frame(Registration_frame, width=295, height=2, bg='black').place(x=25, y=77)
 
-word = Entry(frame, width=25, fg='black', borderwidth=0, bg='white', font='Arimo,11', show='*')
-word.place(x=50, y=100)
+word = Entry(Registration_frame, width=25, fg='indigo', borderwidth=0.5, bg='white', font='Arimo,20')
+word.pack(fill=X, padx=15, pady=5, ipadx=5, ipady=5)
+# word.place(x=50, y=100)
 word.insert(0, 'Password')
 word.bind('<FocusIn>', on_enter1)
 word.bind('<FocusOut>', on_leave1)
 
-Frame(frame, width=295, height=2, bg='black').place(x=25, y=127)
+# Frame(Registration_frame, width=295, height=2, bg='black').place(x=25, y=127)
 
-first_name = Entry(frame, width=25, fg='black', borderwidth=0, bg='white', font='Arimo,11')
-first_name.place(x=50, y=150)
+first_name = Entry(Registration_frame, width=25, fg='indigo', borderwidth=0.5, bg='white', font='Arimo,20')
+first_name.pack(fill=X, padx=15, pady=5, ipadx=5, ipady=5)
+# first_name.place(x=50, y=150)
 first_name.insert(0, 'First Name')
 first_name.bind('<FocusIn>', on_enter2)
 first_name.bind('<FocusOut>', on_leave2)
 
-Frame(frame, width=295, height=2, bg='black').place(x=25, y=177)
+# Frame(Registration_frame, width=295, height=2, bg='black').place(x=25, y=177)
 
-last_name = Entry(frame, width=25, fg='black', borderwidth=0, bg='white', font='Arimo,11')
-last_name.place(x=50, y=200)
+last_name = Entry(Registration_frame, width=25, fg='indigo', borderwidth=0.5, bg='white', font='Arimo,20')
+last_name.pack(fill=X, padx=15, pady=5, ipadx=5, ipady=5)
+# last_name.place(x=50, y=200)
 last_name.insert(0, 'Last Name')
 last_name.bind('<FocusIn>', on_enter3)
 last_name.bind('<FocusOut>', on_leave3)
 
-Frame(frame, width=295, height=2, bg='black').place(x=25, y=227)
+# Frame(Registration_frame, width=295, height=2, bg='black').place(x=25, y=227)
 
-date_of_birth = Entry(frame, width=25, fg='black', borderwidth=0, bg='white', font='Arimo,11')
-date_of_birth.place(x=50, y=250)
+date_of_birth = Entry(Registration_frame, width=25, fg='indigo', borderwidth=0.5, bg='white', font='Arimo,20')
+date_of_birth.pack(fill=X, padx=15, pady=5, ipadx=5, ipady=5)
+# date_of_birth.place(x=50, y=250)
 date_of_birth.insert(0, 'Date of Birth')
 date_of_birth.bind('<FocusIn>', on_enter4)
 date_of_birth.bind('<FocusOut>', on_leave4)
 
-Frame(frame, width=295, height=2, bg='black').place(x=25, y=277)
+# Frame(Registration_frame, width=295, height=2, bg='black').place(x=25, y=277)
 
-register_button = Button(frame, text='Register', width=15, bg='#0047ab', fg='white', font='Arimo, 11', command=register)
-register_button.place(x=120, y=310)
+register_button = Button(Registration_frame, text='Register', width=15, bg='#0047ab', fg='white', font='Arimo, 25', command=register)
+# register_button.place(x=120, y=310)
+register_button.pack(fill=X, padx=15, pady=10, ipadx=5, ipady=5)
 
 root.mainloop()

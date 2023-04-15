@@ -125,5 +125,5 @@ register_label.bind('<Button-1>', open_register_window)
 widget_list = root.winfo_children()
 for widget in widget_list:
     print(widget)
-    
+
 root.mainloop()
