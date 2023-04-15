@@ -1,12 +1,31 @@
 import tkinter as tk
 import mysql.connector
 from tkinter import messagebox
+
+# Connect to the database
 mydb = mysql.connector.connect(
     host="localhost",
     user="sqluser",
     password="password",
     database="ananya"
-    )
+)
+
+# # Connect to the database #Ananya's version
+# mydb = mysql.connector.connect(
+#     host="localhost",
+#     user="sqluser",
+#     password="password",
+#     database="ananya"
+# )
+
+# Connect to the database #Punyam's version
+# mydb = mysql.connector.connect(
+#     host="Ideaknight",
+#     user="epiloger",
+#     password="mysql",
+#     database="ananya"
+# )
+
 root = tk.Tk()
 root.title("Inventory Management System")
 root.geometry("800x600")
