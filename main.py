@@ -79,7 +79,7 @@ user.bind('<FocusOut>', on_leave)
 
 def on_enter(e):
     word.delete(0, 'end')
-
+a
 def on_leave(e):
     name = word.get()
     if name == '':

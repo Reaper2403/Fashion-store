@@ -1,1 +1,0 @@
-.pack(side=TOP, fill=X, padx=15, pady=15)
