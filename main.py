@@ -11,6 +11,22 @@ mydb = mysql.connector.connect(
     database="ananya"
 )
 
+# # Connect to the database #Ananya's version
+# mydb = mysql.connector.connect(
+#     host="localhost",
+#     user="sqluser",
+#     password="password",
+#     database="ananya"
+# )
+
+# Connect to the database #Punyam's version
+# mydb = mysql.connector.connect(
+#     host="Ideaknight",
+#     user="epiloger",
+#     password="mysql",
+#     database="ananya"
+# )
+
 root = Tk()
 root.title('LogIn')
 root.geometry('925x480')
