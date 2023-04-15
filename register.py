@@ -4,9 +4,9 @@ import mysql.connector
 
 # Connect to the database
 mydb = mysql.connector.connect(
-    host="Ideaknight",
-    user="epiloger",
-    password="mysql",
+    host="localhost",
+    user="sqluser",
+    password="password",
     database="ananya"
 )
 

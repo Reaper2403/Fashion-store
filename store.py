@@ -2,9 +2,9 @@ import tkinter as tk
 import mysql.connector
 from tkinter import messagebox
 mydb = mysql.connector.connect(
-    host="Ideaknight",
-    user="epiloger",
-    password="mysql",
+    host="localhost",
+    user="sqluser",
+    password="password",
     database="ananya"
     )
 root = tk.Tk()
