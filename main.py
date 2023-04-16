@@ -4,12 +4,12 @@ from tkinter import messagebox
 import mysql.connector
 
 # Connect to the database
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="sqluser",
-    password="password",
-    database="ananya"
-)
+# mydb = mysql.connector.connect(
+#     host="localhost",
+#     user="sqluser",
+#     password="password",
+#     database="ananya"
+# )
 
 # # Connect to the database #Ananya's version
 # mydb = mysql.connector.connect(
@@ -20,18 +20,18 @@ mydb = mysql.connector.connect(
 # )
 
 # Connect to the database #Punyam's version
-# mydb = mysql.connector.connect(
-#     host="Ideaknight",
-#     user="epiloger",
-#     password="mysql",
-#     database="ananya"
-# )
+mydb = mysql.connector.connect(
+    host="Ideaknight",
+    user="epiloger",
+    password="mysql",
+    database="ananya"
+)
 
 root = Tk()
 root.title('LogIn')
 root.geometry('925x480')
 root.config(bg='#ffffff')
-root.resizable(False, False)
+root.resizable(True, True)
 root.iconbitmap('send_message_icon_251493.ico')
 
 def signin():
@@ -47,8 +47,8 @@ def signin():
     if result:
         # If the user exists, run the store functionality from store.py
         root.destroy()
-        from store import run_store
-        run_store()
+        from store import inventory_pages
+        inventory_pages()
 
     else:
         # If the user does not exist, show an error message
@@ -122,8 +122,8 @@ register_label = Label(Login_frame, text='Register new employee here', fg='blue'
 register_label.pack(fill=X, padx=15, pady=15, ipadx=10, ipady=10)
 # register_label.place(x=100, y=280)
 register_label.bind('<Button-1>', open_register_window)
-widget_list = root.winfo_children()
-for widget in widget_list:
-    print(widget)
+# widget_list = root.winfo_children()
+# for widget in widget_list:
+#     print(widget)
 
 root.mainloop()
