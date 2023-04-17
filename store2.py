@@ -10,100 +10,27 @@ mydb = mysql.connector.connect(
     database="ananya"
 )
 
-# # Connect to the database #Ananya's version
-# mydb = mysql.connector.connect(
-#     host="localhost",
-#     user="sqluser",
-#     password="password",
-#     database="ananya"
-# )
-
-# Connect to the database #Punyam's version
-# mydb = mysql.connector.connect(
-#     host="Ideaknight",
-#     user="epiloger",
-#     password="mysql",
-#     database="ananya"
-# )
-
 root = tk.Tk()
 root.title("Inventory Management System")
 root.state("zoomed")
 # Create a cursor to execute the SQL queries
 mycursor = mydb.cursor()
 
-def inventory_pages():
-    # Create the side bar
-    Side_bar = tk.Frame(root, width=200, height=350, bg='white', highlightthickness=2)#border=1, borderwidth=10)
-    Side_bar.pack(side="left", fill="y")
-
-    #Sidebar Image
-    img = Image.open('profile.png')
-    img = img.resize((80, 80), Image.LANCZOS)
-    my_img = ImageTk.PhotoImage(img)
-    my_label = tk.Label(Side_bar, image=my_img, background="white", text="Labl")
-    my_label.pack(side="top", fill="x", pady=(5,10))#.pack(side=LEFT, padx=15, pady=15, fill=X)
-
-    # Add a button to open the products window
-    product_button = tk.Button(Side_bar, width=10, text="Products", command=run_store, borderwidth=1, relief="solid", font=('Arial', 12))
-    product_button.pack(side="top", fill="x", pady=2, ipady=2)
-
-    # Add a button to open the billing window
-    billing_button = tk.Button(Side_bar, width=10, text="Billing", command=open_billing_window, borderwidth=1, relief="solid", font=('Arial', 12))
-    billing_button.pack(side="top", fill="x", pady=5, ipady=2)
-
-    # Logout button
-    # leaveimage = Image.open('leave.png')
-    # leaveimage = leaveimage.resize((30, 30), Image.LANCZOS)
-    # my_img = ImageTk.PhotoImage(img)
-    # leaveimage = ImageTk.PhotoImage(file='leave.png', size=(30,30))
-    # main_button = Button(root, image=img, command=open_level_menu, fg="white", bg="black",)
-    logout_button = tk.Button(Side_bar, text="Logout", width=10, command=lambda: root.destroy())
-    logout_button.pack(side="bottom", fill="y", pady=5, ipadx=2)
-
-    # Heading Label
-    HeadLabel=tk.Label(root, text="Fashion Inventory Management Store")
-    HeadLabel.configure(font=('Arial', 40), bg="white")
-    HeadLabel.pack(side="top", fill="x", ipady=20)
-
-    main_container = tk.Frame(root)
-    billing_window = tk.Frame(root)
-    global current_frame
-    current_frame = main_container
-    # global working_area
-    # working_area= tk.Frame(root).pack()
-    # main_container = tk.Frame(working_area)
-    # billing_window = tk.Frame(working_area)
-    # print("Shazam")
-    run_store()
-
 def open_billing_window():
-
-    global current_frame
-    if current_frame:
-        current_frame.pack_forget()
     # root.withdraw()
     # billing_window = tk.Toplevel()
     # billing_window.title("Billing")
     # billing_window.geometry("800x600")
 
-    # for widget in root.winfo_children():
-    #     # if (widget == main_container):
-    #     #     widget.destroy()
-    #     if (widget == billing_window):
-    #         widget.destroy()
-    # billing_window = tk.Frame(working_area)
-    # for widget in root.winfo_children():
-    #     widget.destroy()
-    # billing_window.pack_forget()
-    # main_container = tk.Frame(working_area)
-    # for widget in main_container.winfo_children():
-    #     widget.destroy()
-    # main_container.pack_forget()
+    for widget in billing_window.winfo_children():
+        widget.destroy()
+    billing_window.pack_forget()
 
-    billing_window = tk.Frame(root)
+    for widget in main_container.winfo_children():
+        widget.destroy()
+    main_container.pack_forget()
+
     billing_window.pack(side="top", fill="both", expand=True)
-    current_frame=billing_window
 
     cart = []
 
@@ -112,7 +39,7 @@ def open_billing_window():
         mycursor.execute("SELECT id, product_name, product_quantity, product_price FROM products WHERE product_name LIKE %s", ("%"+search_query+"%",))
         search_results.delete(0, tk.END)
         for product in mycursor:
-            search_results.insert(tk.END, f"{product[1]} (Qty: {product[2]}) - ₹{product[3]}")
+            search_results.insert(tk.END, f"{product[1]} (Qty: {product[2]}) - ${product[3]}")
 
     def add_to_cart():
         selected_indices = search_results.curselection()
@@ -137,7 +64,7 @@ def open_billing_window():
     def update_cart_list():
         cart_list.delete(0, tk.END)
         for product in cart:
-            cart_list.insert(tk.END, f"{product[0]} - Quantity: {product[1]} - ₹{product[3]}")
+            cart_list.insert(tk.END, f"{product[0]} - Quantity: {product[1]} - ${product[3]}")
 
     def update_product_quantity(product_name, quantity_to_remove):
         mycursor.execute("UPDATE products SET product_quantity = product_quantity - %s WHERE product_name = %s", (quantity_to_remove, product_name))
@@ -148,7 +75,7 @@ def open_billing_window():
 
     def checkout():
         total_cost = get_total_cost()
-        messagebox.showinfo("Total Cost", f"The total cost is ₹{total_cost:.2f}")
+        messagebox.showinfo("Total Cost", f"The total cost is ${total_cost:.2f}")
 
         for product_name, quantity, _, price in cart:
             update_product_quantity(product_name, quantity)
@@ -251,22 +178,13 @@ def open_billing_window():
 
 def run_store():
 
-    global current_frame
-    if current_frame:
-        current_frame.pack_forget()
-
-    # main_container = tk.Frame(working_area)
-    # for widget in root.winfo_children():
-    #     if (widget == main_container):
-    #         widget.destroy()
-        # if (widget == billing_window):
-        #     widget.destroy()
-    # main_container.pack_forget()
+    for widget in main_container.winfo_children():
+        widget.destroy()
+    main_container.pack_forget()
     
-    # billing_window = tk.Frame(working_area)
-    # for widget in billing_window.winfo_children():
-    #     widget.destroy()
-    # billing_window.pack_forget()
+    for widget in billing_window.winfo_children():
+        widget.destroy()
+    billing_window.pack_forget()
     
     # Create a search function that queries the database for matching products
     def search_products():
@@ -282,7 +200,7 @@ def run_store():
         search_query = search_entry.get()
 
         # Execute the SQL query to get matching products
-        mycursor.execute("SELECT product_name, product_quantity, product_price FROM products WHERE (product_name LIKE %s AND product_quantity>0)", ("%"+search_query+"%",))
+        mycursor.execute("SELECT product_name, product_quantity, product_price FROM products WHERE product_name LIKE %s", ("%"+search_query+"%",))
 
         # Display the matching products in the products frame
         for i, row in enumerate(mycursor):
@@ -309,9 +227,8 @@ def run_store():
         message_label.config(text="Product added to database")
 
     # Create the main container frame
-    main_container = tk.Frame(root)
+    # main_container = tk.Frame(root)
     main_container.pack(fill="x")
-    current_frame=main_container
 
     # Create a frame for adding new products
     add_product_frame = tk.LabelFrame(main_container, text="Add Products", width=300, pady=10)
@@ -391,4 +308,40 @@ def run_store():
 
 if __name__ == "__main__":
 
-    inventory_pages()
+    # Create the side bar
+    Side_bar = tk.Frame(root, width=200, height=350, bg='white', highlightthickness=2)#border=1, borderwidth=10)
+    Side_bar.pack(side="left", fill="y")
+
+    #Sidebar Image
+    img = Image.open('profile.png')
+    img = img.resize((80, 80), Image.LANCZOS)
+    my_img = ImageTk.PhotoImage(img)
+    my_label = tk.Label(Side_bar, image=my_img, background="white", text="Labl")
+    my_label.pack(side="top", fill="x", pady=(5,10))#.pack(side=LEFT, padx=15, pady=15, fill=X)
+
+    # Add a button to open the products window
+    product_button = tk.Button(Side_bar, width=10, text="Products", command=run_store, borderwidth=1, relief="solid", font=('Arial', 12))
+    product_button.pack(side="top", fill="x", pady=2, ipady=2)
+
+    # Add a button to open the billing window
+    billing_button = tk.Button(Side_bar, width=10, text="Billing", command=open_billing_window, borderwidth=1, relief="solid", font=('Arial', 12))
+    billing_button.pack(side="top", fill="x", pady=5, ipady=2)
+
+    # Logout button
+    # leaveimage = Image.open('leave.png')
+    # leaveimage = leaveimage.resize((30, 30), Image.LANCZOS)
+    # my_img = ImageTk.PhotoImage(img)
+    # leaveimage = ImageTk.PhotoImage(file='leave.png', size=(30,30))
+    # main_button = Button(root, image=img, command=open_level_menu, fg="white", bg="black",)
+    logout_button = tk.Button(Side_bar, text="Logout", width=10, command=lambda: root.destroy())
+    logout_button.pack(side="bottom", fill="y", pady=5, ipadx=2)
+
+    # Heading Label
+    HeadLabel=tk.Label(root, text="Fashion Inventory Management Store")
+    HeadLabel.configure(font=('Arial', 40), bg="white")
+    HeadLabel.pack(side="top", fill="x", ipady=20)
+
+    main_container = tk.Frame(root)
+    billing_window = tk.Frame(root)
+
+    run_store()
