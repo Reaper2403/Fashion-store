@@ -51,11 +51,14 @@ def register():
 
     # Show a success message and clear the fields
     messagebox.showinfo('Success', 'Registration Successful!')
+   
     user.delete(0, END)
     word.delete(0, END)
     first_name.delete(0, END)
     last_name.delete(0, END)
     date_of_birth.delete(0, END)
+    root.destroy()
+    import main
 
 def on_enter(e):
     user.delete(0, 'end')

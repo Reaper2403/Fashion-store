@@ -12,20 +12,14 @@ import mysql.connector
 # )
 
 # # Connect to the database #Ananya's version
-# mydb = mysql.connector.connect(
-#     host="localhost",
-#     user="sqluser",
-#     password="password",
-#     database="ananya"
-# )
-
-# Connect to the database #Punyam's version
 mydb = mysql.connector.connect(
-    host="Ideaknight",
-    user="epiloger",
-    password="mysql",
+    host="localhost",
+    user="sqluser",
+    password="password",
     database="ananya"
 )
+
+
 
 root = Tk()
 root.title('LogIn')
